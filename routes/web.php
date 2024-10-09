@@ -4,12 +4,14 @@ use App\Http\Controllers\Backend\ChefController;
 use App\Http\Controllers\Backend\EventController;
 use App\Http\Controllers\Backend\ImageController;
 use App\Http\Controllers\Backend\MenuController;
+use App\Http\Controllers\Frontend\BookingController;
+use App\Http\Controllers\Frontend\MainController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MainController::class, '__invoke'])->name('home');
+
+Route::post('booking', [BookingController::class, 'store'])->name('booking');
 
 Route::prefix('panel')->middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('panel.dashboard');

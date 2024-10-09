@@ -56,14 +56,32 @@ class MenuController extends Controller
         ]);
     }
 
-    public function edit(string $id)
+    public function edit(string $uuid)
     {
-        //
+        return view('backend.menus.edit', [
+            'menu' => $this->menuService->selectFirstBy('uuid', $uuid),
+            'categories' => $this->categoryService->select()
+        ]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(MenuRequest $request, string $uuid)
     {
-        //
+        $data = $request->validated();
+
+        $getMenu = $this->menuService->selectFirstBy('uuid', $uuid);
+
+        try {
+            if ($request->hasFile('image')) {
+                $this->fileService->delete($getMenu->file);
+                $data['image'] = $this->fileService->upload($request->file('image'), 'menus');
+            }
+
+            $getMenu->update($data);
+
+            return redirect()->route('panel.menus.index')->with('success', 'Menu updated successfully');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     public function destroy(string $uuid)

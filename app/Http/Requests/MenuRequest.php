@@ -21,8 +21,10 @@ class MenuRequest extends FormRequest
      */
     public function rules(): array
     {
+        $routeUuid = $this->route('menu');
+
         return [
-            'name' => 'required|min:3|max:255|unique:menus,name',
+            'name' => 'required|min:3|max:255|unique:menus,name,' . $routeUuid . ',uuid',
             'category_id' => 'required|exists:categories,id',
             'description' => 'required|min:3',
             'price' => 'required|numeric|min:0',

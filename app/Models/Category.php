@@ -29,4 +29,9 @@ class Category extends Model
             $model->slug = (string) Str::slug($model->title);
         });
     }
+
+    public function menus()
+    {
+        return $this->hasMany(Menu::class);
+    }
 }
