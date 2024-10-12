@@ -33,6 +33,26 @@
 
 <body class="index-page">
 
+    @if (session('success'))
+    <div class="card border-0 sticky-top bg-success rounded-0 text-white allert">
+        <div class="card-body">
+            <div class="container">
+                <i class="bi bi-bag-check-fill me-2"></i> {{ session('success') }}
+            </div>
+        </div>
+    </div>
+    @endif
+
+    @if (session('error'))
+    <div class="card border-0 sticky-top bg-danger rounded-0 text-white allert">
+        <div class="card-body">
+            <div class="container">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ session('error') }}
+            </div>
+        </div>
+    </div>
+    @endif
+    
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container position-relative d-flex align-items-center justify-content-between">
 
@@ -681,6 +701,23 @@
 
     <!-- Main JS File -->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+
+    @if (session('success') || session('error'))
+    <script>
+        document.querySelector("#header").classList.remove("sticky-top");
+        setTimeout(function() {
+            document.querySelector(".allert").classList.add("d-none");
+            document.querySelector("#header").classList.add("sticky-top");
+        }, 3000);
+    </script>
+    @endif
+
+    @if (session()->has('errors'))
+    <script>
+        const modalBook = new bootstrap.Modal('#modalBook', {})
+        modalBook.show(true);
+    </script>
+    @endif
 
 </body>
 

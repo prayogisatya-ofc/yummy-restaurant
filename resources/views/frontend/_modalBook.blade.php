@@ -6,54 +6,94 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('booking') }}" method="post" role="form" class="php-email-form">
+                <form action="{{ route('booking') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <select name="type" class="form-select" required>
+                        <select name="type" class="form-select @error('type') is-invalid @enderror">
                             <option value="">Select type ---</option>
                             <option value="table">Table</option>
                             <option value="event">Event</option>
                             <option value="menu">Menu</option>
                         </select>
+                        @error('type')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="row gy-4">
                         <div class="col-lg-4 col-md-6">
-                            <input type="text" name="name" class="form-control" id="name"
-                                placeholder="Your Name" required="">
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name"
+                                placeholder="Your Name">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <input type="email" class="form-control" name="email" id="email"
-                                placeholder="Your Email" required="">
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email"
+                                placeholder="Your Email">
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <input type="text" class="form-control" name="phone" id="phone"
-                                placeholder="Your Phone" required="">
+                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone"
+                                placeholder="Your Phone">
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <input type="date" name="date" class="form-control" id="date"
-                                placeholder="Date" required="">
+                            <input type="date" name="date" class="form-control @error('date') is-invalid @enderror" id="date"
+                                placeholder="Date">
+                            @error('date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <input type="time" class="form-control" name="time" id="time"
-                                placeholder="Time" required="">
+                            <input type="time" class="form-control @error('time') is-invalid @enderror" name="time" id="time"
+                                placeholder="Time">
+                            @error('time')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <input type="number" class="form-control" name="people" id="people"
-                                placeholder="# of people" required="">
+                            <input type="number" class="form-control @error('people') is-invalid @enderror" name="people" id="people"
+                                placeholder="# of people">
+                            @error('people')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="form-group mt-3">
-                        <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
+                        <input type="file" class="form-control @error('file') is-invalid @enderror" name="file" accept="image/*">
+                        @error('file')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
-                    <div class="text-center mt-3">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">
-                            Your booking request was sent. We will call back or send an
-                            Email to confirm your reservation. Thank you!
-                        </div>
+                    <div class="form-group mt-3 mb-3">
+                        <textarea class="form-control @error('messages') is-invalid @enderror" name="messages" rows="5" placeholder="Message"></textarea>
+                        @error('messages')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="d-flex justify-content-end gap-2">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

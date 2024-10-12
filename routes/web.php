@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\ChefController;
 use App\Http\Controllers\Backend\EventController;
 use App\Http\Controllers\Backend\ImageController;
 use App\Http\Controllers\Backend\MenuController;
+use App\Http\Controllers\Backend\TransactionController;
 use App\Http\Controllers\Frontend\BookingController;
 use App\Http\Controllers\Frontend\MainController;
 use App\Http\Controllers\HomeController;
@@ -20,6 +21,7 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('menus', MenuController::class)->names('panel.menus');
     Route::resource('chefs', ChefController::class)->names('panel.chefs');
     Route::resource('events', EventController::class)->names('panel.events');
+    Route::resource('transactions', TransactionController::class)->names('panel.transactions');
 });
 
 Auth::routes();
