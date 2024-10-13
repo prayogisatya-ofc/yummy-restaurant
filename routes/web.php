@@ -21,7 +21,8 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('menus', MenuController::class)->names('panel.menus');
     Route::resource('chefs', ChefController::class)->names('panel.chefs');
     Route::resource('events', EventController::class)->names('panel.events');
-    Route::resource('transactions', TransactionController::class)->names('panel.transactions');
+    Route::resource('transactions', TransactionController::class)->names('panel.transactions')->except('create', 'store', 'edit');
+    Route::post('transactions/download', [TransactionController::class, 'download'])->name('panel.transactions.download');
 });
 
 Auth::routes();

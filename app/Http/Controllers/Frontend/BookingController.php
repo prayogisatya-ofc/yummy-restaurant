@@ -37,7 +37,7 @@ class BookingController extends Controller
 
             return redirect()->back()->with('success', 'Booking created successfully. Please check your email for information.');
         } catch (\Throwable $th) {
-            $this->fileService->delete('transactions/' . $data['file']);
+            $this->fileService->delete($data['file']);
             
             return redirect()->back()->with('error', $th->getMessage());
         }

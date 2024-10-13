@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\TransactionExport;
 use App\Http\Controllers\Controller;
 use App\Http\Services\FileService;
 use App\Mail\BookingMailPending;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TransactionController extends Controller
 {
@@ -54,5 +56,15 @@ class TransactionController extends Controller
         $transaction->delete();
 
         return redirect()->back()->with('success', 'Transaction deleted successfully');
+    }
+
+    public function download(Request $request)
+    {
+        $data = $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date'
+        ]);
+
+        return Excel::download(new TransactionExport($data['start_date'], $data['end_date']), 'transactions.xlsx');
     }
 }
