@@ -109,11 +109,37 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card border-0 shadow">
+        <div class="card border-0 shadow mb-4">
             <div class="card-body">
                 <img src="{{ asset('storage/' . $transaction->file) }}" alt="{{ $transaction->name }}" class="w-100">
             </div>
         </div>
+        @if ($transaction->reviews->count() > 0)
+        <div class="card border-0 shadow">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table w-100 table-striped">
+                        <tr class="align-middle">
+                            <th width="200">Name</th>
+                            <td>: {{ $transaction->reviews->first()->name }}</td>
+                        </tr>
+                        <tr class="align-middle">
+                            <th width="200">Rate</th>
+                            <td>: {{ $transaction->reviews->first()->rate }} Star</td>
+                        </tr>
+                        <tr class="align-middle">
+                            <th width="200">Comment</th>
+                            <td>: {{ $transaction->reviews->first()->comment }}</td>
+                        </tr>
+                        <tr class="align-middle">
+                            <th width="200">Created At</th>
+                            <td>: {{ $transaction->reviews->first()->created_at }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>            
+        @endif
     </div>
 </div>
 @endsection

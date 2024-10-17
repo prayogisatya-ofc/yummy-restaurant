@@ -14,7 +14,9 @@ class ImageController extends Controller
     public function __construct(
         private FileService $fileService,
         private ImageService $imageService
-    ){}
+    ){
+        $this->middleware('checkRole:operator')->only('create', 'store', 'edit', 'update', 'destroy');
+    }
 
     public function index()
     {
@@ -43,11 +45,6 @@ class ImageController extends Controller
             
             return redirect()->back()->with('error', $th->getMessage());
         }
-    }
-
-    public function show(string $id)
-    {
-        //
     }
 
     public function edit(string $uuid)

@@ -15,7 +15,9 @@ class TransactionController extends Controller
 {
     public function __construct(
         private FileService $fileService
-    ){}
+    ){
+        $this->middleware('checkRole:operator')->only('update', 'destroy');
+    }
     
     public function index()
     {

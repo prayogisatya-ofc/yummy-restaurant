@@ -14,7 +14,9 @@ class EventController extends Controller
     public function __construct(
         private EventService $eventService,
         private FileService $fileService
-    ){}
+    ){
+        $this->middleware('checkRole:operator')->only('create', 'store', 'edit', 'update', 'destroy');
+    }
 
     public function index()
     {

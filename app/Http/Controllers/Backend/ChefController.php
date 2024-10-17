@@ -14,7 +14,9 @@ class ChefController extends Controller
     public function __construct(
         private ChefService $chefService,
         private FileService $fileService
-    ){}
+    ){
+        $this->middleware('checkRole:operator')->only('create', 'store', 'edit', 'update', 'destroy');
+    }
     
     public function index()
     {

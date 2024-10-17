@@ -25,12 +25,14 @@
             <h1 class="h4">Events</h1>
             <p class="mb-0">Daftar event di Yummy Restaurant</p>
         </div>
+        @if (auth()->user()->role == 'operator')
         <div>
             <a href="{{ route('panel.events.create') }}"
                 class="btn btn-outline-gray-600 d-inline-flex align-items-center">
                 Create Event
             </a>
         </div>
+        @endif
     </div>
 </div>
 
@@ -79,6 +81,7 @@
                                         <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
                                     </svg>
                                 </a>
+                                @if (auth()->user()->role == 'operator')
                                 <a href="{{ route('panel.events.edit', $item->uuid) }}" class="btn btn-sm btn-secondary">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -90,11 +93,14 @@
                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                                     </svg>
                                 </button>
+                                @endif
                             </div>
+                            @if (auth()->user()->role == 'operator')
                             <form action="{{ route('panel.events.destroy', $item->uuid) }}" hidden method="post" id="delete-image-{{ $item->uuid }}">
                                 @csrf
                                 @method('DELETE')
                             </form>
+                            @endif
                         </td>
                     </tr>
                     @empty

@@ -25,12 +25,14 @@
             <h1 class="h4">Images</h1>
             <p class="mb-0">Daftar gambar di Yummy Restaurant</p>
         </div>
+        @if (auth()->user()->role == 'operator')
         <div>
             <a href="{{ route('panel.images.create') }}"
                 class="btn btn-outline-gray-600 d-inline-flex align-items-center">
                 Create Image
             </a>
         </div>
+        @endif
     </div>
 </div>
 
@@ -52,7 +54,9 @@
                         <th class="border-0">Name</th>
                         <th class="border-0">Slug</th>
                         <th class="border-0">Description</th>
+                        @if (auth()->user()->role == 'operator')
                         <th class="border-0 rounded-end">Action</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -65,14 +69,9 @@
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->slug }}</td>
                         <td>{{ Str::limit($item->description, 50) }}</td>
+                        @if (auth()->user()->role == 'operator')
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ route('panel.images.show', $item->uuid) }}" class="btn btn-sm btn-primary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                    </svg>
-                                </a>
                                 <a href="{{ route('panel.images.edit', $item->uuid) }}" class="btn btn-sm btn-secondary">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -90,6 +89,7 @@
                                 @method('DELETE')
                             </form>
                         </td>
+                        @endif
                     </tr>
                     @empty
                     <tr>

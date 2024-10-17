@@ -16,7 +16,9 @@ class MenuController extends Controller
         private FileService $fileService,
         private MenuService $menuService,
         private CategoryService $categoryService
-    ){}
+    ){
+        $this->middleware('checkRole:operator')->only('create', 'store', 'edit', 'update', 'destroy');
+    }
 
     public function index()
     {

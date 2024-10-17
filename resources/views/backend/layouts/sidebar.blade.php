@@ -100,7 +100,7 @@
             </li>
             <li class="nav-item">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
-                    data-bs-toggle="collapse" data-bs-target="#submenu-gallery" aria-expanded="{{ request()->routeIs('panel.images.*') ? 'true' : '' }}">
+                    data-bs-toggle="collapse" data-bs-target="#submenu-gallery" aria-expanded="{{ request()->routeIs('panel.images.*') || request()->routeIs('panel.videos.*') ? 'true' : '' }}">
                     <span>
                         <span class="sidebar-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="icon icon-xs me-2" viewBox="0 0 20 20">
@@ -119,15 +119,15 @@
                         </svg>
                     </span>
                 </span>
-                <div class="multi-level collapse {{ request()->routeIs('panel.images.*') ? 'show' : '' }}" role="list" id="submenu-gallery" aria-expanded="false">
+                <div class="multi-level collapse {{ request()->routeIs('panel.images.*') || request()->routeIs('panel.videos.*') ? 'show' : '' }}" role="list" id="submenu-gallery" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ request()->routeIs('panel.images.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('panel.images.index') }}">
                                 <span class="sidebar-text">Images</span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="">
+                        <li class="nav-item {{ request()->routeIs('panel.videos.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('panel.videos.index') }}">
                                 <span class="sidebar-text">Videos</span>
                             </a>
                         </li>
@@ -142,8 +142,8 @@
                     <span class="sidebar-text">Transactions</span>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a href="../../pages/transactions.html" class="nav-link">
+            <li class="nav-item {{ request()->routeIs('panel.reviews.*') ? 'active' : '' }}">
+                <a href="{{ route('panel.reviews.index') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="icon icon-xs me-2" viewBox="0 0 20 20">
                             <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>

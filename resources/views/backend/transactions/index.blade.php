@@ -52,7 +52,9 @@
                             <th class="border-0">Amount</th>
                             <th class="border-0">Created At</th>
                             <th class="border-0">Status</th>
+                            @if (auth()->user()->role == 'operator')
                             <th class="border-0">Status Action</th>
+                            @endif
                             <th class="border-0 rounded-end">Action</th>
                         </tr>
                     </thead>
@@ -76,6 +78,7 @@
                                         <span class="badge bg-danger">Failed</span>
                                     @endif
                                 </td>
+                                @if (auth()->user()->role == 'operator')
                                 <td>
                                     <form action="{{ route('panel.transactions.update', $transaction->uuid) }}"
                                         method="post" class="d-inline">
@@ -91,6 +94,7 @@
                                         </select>
                                     </form>
                                 </td>
+                                @endif
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <a href="{{ route('panel.transactions.show', $transaction->uuid) }}"
@@ -102,6 +106,7 @@
                                                     d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
                                             </svg>
                                         </a>
+                                        @if (auth()->user()->role == 'operator')
                                         <button type="submit" form="delete-image-{{ $transaction->uuid }}"
                                             class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -110,12 +115,15 @@
                                                     d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
                                             </svg>
                                         </button>
+                                        @endif
                                     </div>
+                                    @if (auth()->user()->role == 'operator')
                                     <form action="{{ route('panel.transactions.destroy', $transaction->uuid) }}" hidden
                                         method="post" id="delete-image-{{ $transaction->uuid }}">
                                         @csrf
                                         @method('DELETE')
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @empty

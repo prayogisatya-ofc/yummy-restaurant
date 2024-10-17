@@ -35,4 +35,9 @@ class Transaction extends Model
             $model->code = (string) Str::random(6);
         });
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

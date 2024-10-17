@@ -1,21 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Gallery;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Review extends Model
+class Video extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'uuid',
-        'transaction_id',
         'name',
-        'rate',
-        'comment'
+        'video_link'
     ];
 
     protected static function boot()
@@ -25,10 +23,5 @@ class Review extends Model
         static::creating(function ($model) {
             $model->uuid = (string) Str::uuid();
         });
-    }
-
-    public function transaction()
-    {
-        return $this->belongsTo(Transaction::class);
     }
 }
